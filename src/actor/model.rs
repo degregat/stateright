@@ -42,7 +42,11 @@ where
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum ActorModelAction<Msg, Timer> {
     /// A message can be delivered to an actor.
-    Deliver { src: Id, dst: Id, msg: Msg },
+    Deliver {
+        src: Id,
+        dst: Id,
+        msg: Msg,
+    },
     /// A message can be dropped if the network is lossy.
     Drop(Envelope<Msg>),
     /// An actor can by notified after a timeout.
@@ -785,7 +789,8 @@ mod test {
                 .spawn_bfs()
                 .join()
                 .unique_state_count(),
-            2); // initial and delivery of Interesting
+            2
+        ); // initial and delivery of Interesting
         assert_eq!(
             model
                 .clone()
@@ -794,7 +799,8 @@ mod test {
                 .spawn_bfs()
                 .join()
                 .unique_state_count(),
-            2); // initial and delivery of Interesting
+            2
+        ); // initial and delivery of Interesting
         assert_eq!(
             model
                 .clone()
@@ -803,7 +809,8 @@ mod test {
                 .spawn_bfs()
                 .join()
                 .unique_state_count(),
-            3); // initial, delivery of Uninteresting, and subsequent delivery of Interesting
+            3
+        ); // initial, delivery of Uninteresting, and subsequent delivery of Interesting
     }
 
     #[test]

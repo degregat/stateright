@@ -183,10 +183,8 @@ where
                             // Step 2: Share work.
                             if pending.len() > 1 && thread_count > 1 {
                                 let mut job_market = job_market.lock();
-                                let pieces = 1 + std::cmp::min(
-                                    job_market.wait_count,
-                                    pending.len(),
-                                );
+                                let pieces =
+                                    1 + std::cmp::min(job_market.wait_count, pending.len());
                                 let size = pending.len() / pieces;
                                 for _ in 1..pieces {
                                     log::trace!(

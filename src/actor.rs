@@ -169,7 +169,7 @@ pub enum Command<Msg, Timer> {
 /// Holds [`Command`]s output by an actor.
 pub struct Out<A: Actor>(Vec<Command<A::Msg, A::Timer>>);
 
-impl<A:Actor> Default for Out<A> {
+impl<A: Actor> Default for Out<A> {
     fn default() -> Self {
         Self::new()
     }
@@ -577,11 +577,7 @@ mod test {
         let mut messages_by_state: Vec<_> = accessor()
             .into_iter()
             .map(|s| {
-                let mut messages: Vec<_> = s
-                    .network
-                    .iter_deliverable()
-                    .map(|e| *e.msg)
-                    .collect();
+                let mut messages: Vec<_> = s.network.iter_deliverable().map(|e| *e.msg).collect();
                 messages.sort();
                 messages
             })
